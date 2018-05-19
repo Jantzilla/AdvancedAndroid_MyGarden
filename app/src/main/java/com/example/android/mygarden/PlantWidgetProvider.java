@@ -21,6 +21,7 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
@@ -36,7 +37,16 @@ public class PlantWidgetProvider extends AppWidgetProvider {
                                 int imgRes, long plantId, boolean showWater, int appWidgetId) {
 
         // TODO (4): separate the updateAppWidget logic into getGardenGridRemoteView and getSinglePlantRemoteView
-        // TODO (5): Use getAppWidgetOptions to get widget width and use the appropriate RemoteView method
+        // COMPLETED (5): Use getAppWidgetOptions to get widget width and use the appropriate RemoteView method
+        Bundle options = appWidgetManager.getAppWidgetOptions(appWidgetId);
+        int width = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH);
+        RemoteViews rv;
+        if(width < 300) {
+            rv = getSinglePlantRemoteView(context, imgRes, plantId, showWater);
+        } else {
+            rv = getGardenGridRemoteView(context);
+        }
+        appWidgetManager.updateAppWidget(appWidgetId, rv);
         // TODO (6): Set the PendingIntent template in getGardenGridRemoteView to launch PlantDetailActivity
         
         Intent intent;
