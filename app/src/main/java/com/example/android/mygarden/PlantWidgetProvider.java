@@ -27,9 +27,9 @@ import com.example.android.mygarden.ui.MainActivity;
 
 public class PlantWidgetProvider extends AppWidgetProvider {
 
-    // TODO (1): Modify updateAppWidget method to take an image recourse and call
+    // COMPLETED (1): Modify updateAppWidget method to take an image recourse and call
     // setImageViewResource to update the widget’s image
-    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
+    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int imgRes,
                                 int appWidgetId) {
 
         // Create an Intent to launch MainActivity when clicked
@@ -37,6 +37,9 @@ public class PlantWidgetProvider extends AppWidgetProvider {
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.plant_widget);
+
+        views.setImageViewResource(R.id.widget_plant_image, imgRes);
+
         // Widgets allow click handlers to only launch pending intents
         views.setOnClickPendingIntent(R.id.widget_plant_image, pendingIntent);
         // Add the wateringservice click handler
