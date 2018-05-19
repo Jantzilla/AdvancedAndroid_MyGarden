@@ -55,7 +55,8 @@ public class PlantWidgetProvider extends AppWidgetProvider {
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         // COMPLETED (2): Move the updateAppWidget loop to a new method called updatePlantWidgets and pass through the image recourse
         // There may be multiple widgets active, so update all of them
-        // TODO (4): Call startActionUpdatePlantWidgets in onUpdate as well as in AddPlantActivity and PlantDetailActivity (add and delete plants)
+        // COMPLETED (4): Call startActionUpdatePlantWidgets in onUpdate as well as in AddPlantActivity and PlantDetailActivity (add and delete plants)
+        PlantWateringService.startActionUpdatePlantWidgets(context);
     }
 
     public static void updatePlantWidgets(Context context, AppWidgetManager appWidgetManager, int imgRes, int[] appWidgetIds) {
