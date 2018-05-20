@@ -47,7 +47,7 @@ public class PlantWidgetProvider extends AppWidgetProvider {
             rv = getGardenGridRemoteView(context);
         }
         appWidgetManager.updateAppWidget(appWidgetId, rv);
-        // TODO (6): Set the PendingIntent template in getGardenGridRemoteView to launch PlantDetailActivity
+        // COMPLETED (6): Set the PendingIntent template in getGardenGridRemoteView to launch PlantDetailActivity
         
 
     }
@@ -97,7 +97,18 @@ public class PlantWidgetProvider extends AppWidgetProvider {
     }
 
     private static RemoteViews getGardenGridRemoteView (Context context) {
-        return null;
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_grid_view);
+
+        Intent intent = new Intent(context, GridWidgetService.class);
+        views.setRemoteAdapter(R.id.widget_grid_view, intent);
+
+        Intent appIntent = new Intent(context, PlantDetailActivity.class);
+        PendingIntent appPendingIntent = PendingIntent.getActivity(context, 0, appIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        views.setPendingIntentTemplate(R.id.widget_grid_view, appPendingIntent);
+
+        views.setEmptyView(R.id.widget_grid_view, R.id.empty_view);
+
+        return views;
     }
 
     @Override
